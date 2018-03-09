@@ -18,31 +18,30 @@
         </header>
         
       <section class="container">
-      <form  ng-controller="MovimientoController as movCtrl" ng-submit="movCtrl.addMovimiento()">
+      <form  ng-controller="MovimientoController" ng-submit="submitForm()">
           <div class="form-group" >
               <label for="example-text-input" class="col-sm-2 control-label">Nombre Movimiento</label>
               <div class="col-sm-10">
-              <input class="form-control" ng-model="movCtrl.movimieto.desc_mov" type="text" value="Nombre Movimiento" id="example-text-input">
+              <input class="form-control" name="desc_mov" ng-model="movimiento.desc_mov" type="text"  id="example-text-input">
               </div>
-          </div>
-           <div class="form-group">
-              <label for="example-text-input" class="col-sm-2 control-label">Tipo Movimiento</label>
-              <div class="col-sm-10">
-                  <input id="disabledSelect" ng-model="movCtrl.movimieto.tipo_mov" class="form-control">
-                  </select>
-              </div>
-          </div>
+         
           <div class="form-group">
+             <label for="example-text-input" class="col-sm-2 control-label">Tipo Movimiento</label>
+            <select name="cars" class="form-control" name="tipo_mov" ng-model="movimiento.tipo_mov">
+                <option value="DEB">DEB</option>
+                <option value="CRE">CRE</option>
+            </select>
+          </div>
+          
+          <div class="form-group" >
               <label for="example-text-input" class="col-sm-2 control-label">Valor Movimiento</label>
-              <div class="col-sm-10 ">
-                  <div class="input-group">
-                      <span class="input-group-addon">$</span>
-                      <input type="text" ng-model="movCtrl.movimieto.valor_mov" class="form-control" aria-label="Amount (to the nearest dollar)">
-                  </div>
+              <div class="col-sm-10">
+              <input class="form-control" name="valor_mov" ng-model="movimiento.valor_mov" type="text"  id="example-text-input">
               </div>
           </div>
+
           <div class="form-group" id="primerBoton">
-              <button type="button" class="btn btn-primary btn-sm my-0">Crear Movimiento</button>
+              <button type="submit" class="btn btn-primary btn-sm my-0">Crear Movimiento</button>
           </div>
           
       </form>
@@ -63,15 +62,28 @@
 
     <!--Table body-->
     <tbody ng-repeat="movimiento in banco.movimientos">
-        <tr>
+
+       <tr>
           <!--  <th scope="row"></th>   -->
+            <td>{{movimiento.STR_NOMBRE_MOVIMIENTO}}</td>
+            <td>{{movimiento.STR_TIPO_MOVIMIENTO}}</td>
+            <td>{{movimiento.NUM_VALOR_MOVIMIENTO}}</td>
+            <td>{{movimiento.DTM_FECHA_REGISTRO}}</td> 
+            <td id="eliminar"><button type="button" class="btn btn-primary btn-sm my-0" ng-click="deleteData(movimiento.NUM_ID_MOVIMIENTO)" >Eliminar</button></td>
+        </tr>
+
+
+
+
+     <!--   <tr>
+            <th scope="row"></th> 
             <td>{{movimiento.STR_NOMBRE_MOVIMIENTO}}</td>
             <td>{{movimiento.STR_TIPO_MOVIMIENTO}}</td>
             <td>{{movimiento.NUM_VALOR_MOVIMIENTO}}</td>
             <td>{{movimiento.DTM_FECHA_REGISTRO}}</td> 
             <td id="eliminar"><button type="button" class="btn btn-primary btn-sm my-0" >Eliminar</button></td>
         </tr>
-<!--
+      
         <tr>
             <th scope="row"></th>
             <td></td>
@@ -80,7 +92,10 @@
              <td id="eliminar"><button type="button" class="btn btn-primary btn-sm my-0" >Eliminar</button></td>
         </tr>
 -->
+    <div id="test">
       
+
+    </div>   
        
     </tbody>
     <!--Table body-->
@@ -94,3 +109,9 @@
        <script type="text/javascript" src="js/bootstrap.min.js"></script>
 	</body>
 </html>
+
+
+
+
+<!-- entrada los valores: desc_mov, tipo_mov, valor_mov.
+ Los valores que recibe tipo movimiento deben ser DEB (Debito) o CRE (Crédito). -->
